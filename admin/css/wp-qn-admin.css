@@ -1,0 +1,12 @@
+/**
+ * All of the CSS for your dashboard-specific functionality should be
+ * included in this file.
+ */
+
+#wp-admin-bar-qn_pages{
+    color: #fff;
+}
+
+#wp-admin-bar-qn_pages:hover{
+    cursor: pointer;
+}
