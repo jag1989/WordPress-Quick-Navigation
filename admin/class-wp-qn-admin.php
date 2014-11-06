@@ -108,7 +108,7 @@ class WP_QN_Admin {
 		$args = array(
 			'post_type' => 'page',
 			'post_status' => array(
-				'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit'
+				'publish', 'pending', 'draft', 'future', 'private', 'inherit'
 			),
 			'posts_per_page' => -1,
 			'orderby' => 'name',
