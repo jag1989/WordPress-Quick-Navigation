@@ -100,27 +100,30 @@ class WP_QN_Admin {
 
 	}
 
-	public function dropdown( $wp_admin_bar ) {
+	public function dropdown_pages( $wp_admin_bar ) {
 
 		global $post;
 		$temp_p = $post;
+		$id = 'qn_pages';
 
 		$args = array(
 			'post_type' => 'page',
 			'post_status' => array(
-				'publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit'
+				'publish', 'pending', 'draft', 'future', 'private', 'inherit'
 			),
 			'posts_per_page' => -1,
 			'orderby' => 'name',
 			'order' => 'ASC',
-			'post_parent' => 0
+			'post_parent' => 0,
+			'orderby' => 'name',
+			'order' => 'ASC'
 		);
 		$listpages = new WP_Query( $args );
 
 		if ( $listpages->have_posts() ) :
 
 			$args = array(
-				'id'    => 'qn_pages',
+				'id'    => $id,
 				'title' => 'Jump to Page',
 				'meta'  => array(
 					'class' => 'wp-qn-container'
@@ -130,7 +133,50 @@ class WP_QN_Admin {
 
 			while ( $listpages->have_posts() ) : $listpages->the_post();
 
-				$this->listdropdown($wp_admin_bar, $post);
+				$this->listdropdown($wp_admin_bar, $post, $id);
+
+			endwhile;
+		endif;
+
+		wp_reset_postdata();
+		$post = $temp_p;
+
+	}
+
+	public function dropdown_posts( $wp_admin_bar ) {
+
+		global $post;
+		$temp_p = $post;
+		$id = 'qn_posts';
+
+		$args = array(
+			'post_type' => 'post',
+			'post_status' => array(
+				'publish', 'pending', 'draft', 'future', 'private', 'inherit'
+			),
+			'posts_per_page' => -1,
+			'orderby' => 'name',
+			'order' => 'ASC',
+			'post_parent' => 0,
+			'orderby' => 'date',
+			'order' => 'DESC'
+		);
+		$listposts = new WP_Query( $args );
+
+		if ( $listposts->have_posts() ) :
+
+			$args = array(
+				'id'    => $id,
+				'title' => 'Jump to Post',
+				'meta'  => array(
+					'class' => 'wp-qn-container'
+				)
+			);
+			$wp_admin_bar->add_node( $args );
+
+			while ( $listposts->have_posts() ) : $listposts->the_post();
+
+				$this->listdropdown($wp_admin_bar, $post, $id);
 
 			endwhile;
 		endif;
@@ -141,14 +187,14 @@ class WP_QN_Admin {
 	}
 
 
-	private function listdropdown( $wp_admin_bar, $post ){
+	private function listdropdown( $wp_admin_bar, $post, $id){
 		$children =  get_pages( array ('child_of' => $post->ID ) );
 		if( count( $children ) == 0 ) :
 			$args = array(
 				'id'    => get_the_ID(),
 				'title' => get_the_title(),
 				'href'  => get_edit_post_link(),
-				'parent' => 'qn_pages'
+				'parent' => $id
 			);
 			$wp_admin_bar->add_node( $args );
 		else :
@@ -156,7 +202,7 @@ class WP_QN_Admin {
 				'id'    => get_the_ID().'group',
 				'title' => get_the_title(),
 				'href'  => get_edit_post_link(),
-				'parent' => 'qn_pages'
+				'parent' => $id
 			);
 			$wp_admin_bar->add_group( $args );
 

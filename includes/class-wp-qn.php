@@ -122,10 +122,11 @@ class WP_QN {
 
 		$plugin_admin = new WP_QN_Admin( $this->get_plugin_name(), $this->get_version() );
 
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-//		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'dropdown', 90 );
+		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'dropdown_pages', 90 );
+		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'dropdown_posts', 90 );
 
 	}
 
