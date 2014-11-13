@@ -3,10 +3,17 @@
  * included in this file.
  */
 
-#wp-admin-bar-qn_pages{
+#wp-admin-bar-qn_pages,
+#wp-admin-bar-qn_posts{
     color: #fff;
 }
 
-#wp-admin-bar-qn_pages:hover{
+#wp-admin-bar-qn_pages:hover,
+#wp-admin-bar-qn_posts:hover{
     cursor: pointer;
+}
+
+.ab-top-menu > #wp-admin-bar-qn_posts.menupop > .ab-sub-wrapper{
+    max-height: 400px;
+    overflow-y: scroll;
 }
