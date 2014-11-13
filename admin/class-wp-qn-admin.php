@@ -104,6 +104,7 @@ class WP_QN_Admin {
 
 		global $post;
 		$temp_p = $post;
+		$id = 'qn_pages';
 
 		$args = array(
 			'post_type' => 'page',
@@ -120,7 +121,7 @@ class WP_QN_Admin {
 		if ( $listpages->have_posts() ) :
 
 			$args = array(
-				'id'    => 'qn_pages',
+				'id'    => $id,
 				'title' => 'Jump to Page',
 				'meta'  => array(
 					'class' => 'wp-qn-container'
@@ -141,14 +142,14 @@ class WP_QN_Admin {
 	}
 
 
-	private function listdropdown( $wp_admin_bar, $post ){
+	private function listdropdown( $wp_admin_bar, $post, $id){
 		$children =  get_pages( array ('child_of' => $post->ID ) );
 		if( count( $children ) == 0 ) :
 			$args = array(
 				'id'    => get_the_ID(),
 				'title' => get_the_title(),
 				'href'  => get_edit_post_link(),
-				'parent' => 'qn_pages'
+				'parent' => $id
 			);
 			$wp_admin_bar->add_node( $args );
 		else :
@@ -156,7 +157,7 @@ class WP_QN_Admin {
 				'id'    => get_the_ID().'group',
 				'title' => get_the_title(),
 				'href'  => get_edit_post_link(),
-				'parent' => 'qn_pages'
+				'parent' => $id
 			);
 			$wp_admin_bar->add_group( $args );
 
