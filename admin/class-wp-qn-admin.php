@@ -133,7 +133,50 @@ class WP_QN_Admin {
 
 			while ( $listpages->have_posts() ) : $listpages->the_post();
 
-				$this->listdropdown($wp_admin_bar, $post);
+				$this->listdropdown($wp_admin_bar, $post, $id);
+
+			endwhile;
+		endif;
+
+		wp_reset_postdata();
+		$post = $temp_p;
+
+	}
+
+	public function dropdown_posts( $wp_admin_bar ) {
+
+		global $post;
+		$temp_p = $post;
+		$id = 'qn_posts';
+
+		$args = array(
+			'post_type' => 'post',
+			'post_status' => array(
+				'publish', 'pending', 'draft', 'future', 'private', 'inherit'
+			),
+			'posts_per_page' => -1,
+			'orderby' => 'name',
+			'order' => 'ASC',
+			'post_parent' => 0,
+			'orderby' => 'date',
+			'order' => 'DESC'
+		);
+		$listposts = new WP_Query( $args );
+
+		if ( $listposts->have_posts() ) :
+
+			$args = array(
+				'id'    => $id,
+				'title' => 'Jump to Post',
+				'meta'  => array(
+					'class' => 'wp-qn-container'
+				)
+			);
+			$wp_admin_bar->add_node( $args );
+
+			while ( $listposts->have_posts() ) : $listposts->the_post();
+
+				$this->listdropdown($wp_admin_bar, $post, $id);
 
 			endwhile;
 		endif;

@@ -126,6 +126,7 @@ class WP_QN {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'dropdown_pages', 90 );
+		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'dropdown_posts', 90 );
 
 	}
 
