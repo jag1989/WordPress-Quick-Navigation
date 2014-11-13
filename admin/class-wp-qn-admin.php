@@ -100,7 +100,7 @@ class WP_QN_Admin {
 
 	}
 
-	public function dropdown( $wp_admin_bar ) {
+	public function dropdown_pages( $wp_admin_bar ) {
 
 		global $post;
 		$temp_p = $post;
@@ -114,7 +114,9 @@ class WP_QN_Admin {
 			'posts_per_page' => -1,
 			'orderby' => 'name',
 			'order' => 'ASC',
-			'post_parent' => 0
+			'post_parent' => 0,
+			'orderby' => 'name',
+			'order' => 'ASC'
 		);
 		$listpages = new WP_Query( $args );
 
