@@ -1,6 +1,6 @@
-=== WordPress Quick Navigation ===
+=== WP Quick Navigation ===
 Contributors: jag1989
-Tags: quick navigation, admin bar, all posts, all pages, navigation
+Tags: quick navigation, admin bar, all posts, all pages, navigation, wp quick navi
 Requires at least: 4.0
 Tested up to: 4.0
 Stable Tag: 2.0
@@ -19,12 +19,6 @@ These links direct straight to the WYSIWYG editor for any give page/post.
 1. Upload the folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Done.
-
-
-== Frequently Asked Questions ==
-
-
-== Screenshots ==
 
 == Changelog ==
 
